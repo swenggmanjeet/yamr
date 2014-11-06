@@ -19,13 +19,26 @@ module.exports = function(grunt) {
 				dest: 'public/app.js'
 			}
 		},
+		shell: {
+			buildAndRun: {
+				command: 'go build'
+			}
+		},
 		watch: {
-			all: {
-				files: ['app/assets/stylesheets/**/*.less', 'app/assets/javascripts/**/*.js'],
-				tasks: ['default'],
-				options: {
-					livereload: true
-				}
+			stylesheets: {
+				files: ['app/assets/stylesheets/**/*.less'],
+				tasks: ['less'],
+				options: { livereload: true }
+			},
+			scripts: {
+				files: ['app/assets/javascripts/**/*.js'],
+				tasks: ['concat'],
+				options: { livereload: true }
+			},
+			app: {
+				files: ['*.go'],
+				tasks: ['shell:buildAndRun'],
+				options: { livereload: true }
 			}
 		},
 	})
@@ -33,6 +46,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-less')
 	grunt.loadNpmTasks('grunt-contrib-watch')
+	grunt.loadNpmTasks('grunt-shell')
 
-	grunt.registerTask('default', ['less', 'concat'])
+	grunt.registerTask('default', ['less', 'concat', 'shell:buildAndRun'])
 }

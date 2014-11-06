@@ -31,7 +31,7 @@ Create a config.go file with the following
 
 Run the following to start the server
 
-    go run *.go
+    ./yamr
 
 #### Nginx
 
