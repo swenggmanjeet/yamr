@@ -9,6 +9,12 @@ module.exports = function(grunt) {
 				dest: 'public/app.css'
 			}
 		},
+		cssmin: {
+			minify: {
+				src: ['public/app.css'],
+				dest: 'public/app.css'
+			}
+		},
 		concat: {
 			dist: {
 				src: [
@@ -34,12 +40,12 @@ module.exports = function(grunt) {
 		watch: {
 			stylesheets: {
 				files: ['app/assets/stylesheets/**/*.less'],
-				tasks: ['less'],
+				tasks: ['less', 'cssmin'],
 				options: { livereload: true }
 			},
 			scripts: {
 				files: ['app/assets/javascripts/**/*.js'],
-				tasks: ['concat'],
+				tasks: ['concat', 'uglify'],
 				options: { livereload: true }
 			},
 			app: {
@@ -51,10 +57,11 @@ module.exports = function(grunt) {
 	})
 
 	grunt.loadNpmTasks('grunt-contrib-concat')
+	grunt.loadNpmTasks('grunt-contrib-cssmin')
 	grunt.loadNpmTasks('grunt-contrib-less')
 	grunt.loadNpmTasks('grunt-contrib-uglify')
 	grunt.loadNpmTasks('grunt-contrib-watch')
 	grunt.loadNpmTasks('grunt-shell')
 
-	grunt.registerTask('default', ['shell:buildAndRun', 'less', 'concat', 'uglify'])
+	grunt.registerTask('default', ['shell:buildAndRun', 'less', 'cssmin', 'concat', 'uglify'])
 }
