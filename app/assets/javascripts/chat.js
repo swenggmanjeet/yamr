@@ -478,9 +478,9 @@ var chat = {
 
 		if ('created' in obj) {
 			var MS_PER_MINUTE = 60000;
-			var utc = new Date(obj.created);
-			var d = new Date(utc.valueOf() -  date.getTimezoneOffset() * MS_PER_MINUTE);
-
+			// var utc = new Date(obj.created);
+			// var d = new Date(utc.valueOf() -  date.getTimezoneOffset() * MS_PER_MINUTE);
+			var d = new Date(obj.created)
 			var time = chat.formatTime(d);
 			var scrolledBottom = true;
 
