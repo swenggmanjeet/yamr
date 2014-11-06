@@ -19,6 +19,13 @@ module.exports = function(grunt) {
 				dest: 'public/app.js'
 			}
 		},
+		uglify: {
+			my_target: {
+				files: {
+					'public/app.js': ['public/app.js']
+				}
+			}
+		},
 		shell: {
 			buildAndRun: {
 				command: 'go build'
@@ -43,10 +50,11 @@ module.exports = function(grunt) {
 		},
 	})
 
-	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-concat')
 	grunt.loadNpmTasks('grunt-contrib-less')
+	grunt.loadNpmTasks('grunt-contrib-uglify')
 	grunt.loadNpmTasks('grunt-contrib-watch')
 	grunt.loadNpmTasks('grunt-shell')
 
-	grunt.registerTask('default', ['less', 'concat', 'shell:buildAndRun'])
+	grunt.registerTask('default', ['shell:buildAndRun', 'less', 'concat', 'uglify'])
 }
